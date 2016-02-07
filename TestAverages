@@ -1,0 +1,33 @@
+package testaverages;
+
+import java.io.*;
+
+/**
+ *
+ * @author Mark Bollinger
+ */
+public class TestAverages {
+
+    public static void main(String[] args) throws IOException {
+        
+        double average;
+        int studentNumber = 1;
+        
+        scoreReader scoreReader = new scoreReader("Grades.csv");  // create a scoreReader object
+        
+        while(scoreReader.readNextLine()) {  //display the averages
+            
+            average = scoreReader.getAverage();  //get the average from the scoreReader
+            
+            System.out.println("Average for student " + studentNumber + " is " + average);
+            
+            studentNumber++;
+            
+        }
+        
+        scoreReader.close();
+        System.out.println("no more scores.");
+        
+    }
+    
+}

@@ -1,0 +1,57 @@
+package testaverages;
+
+import java.io.*;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Mark
+ */
+public class scoreReader {
+    
+    private Scanner inputFile;
+    private String line;  
+    
+    public scoreReader(String filename) throws IOException {
+        
+        File file = new File(filename);  // the constructor opens a file to read the grades from
+        inputFile = new Scanner(file);
+    }
+    
+    public boolean readNextLine() throws IOException {
+        
+        boolean lineRead;
+        
+        lineRead = inputFile.hasNext(); // determine whether there is more to read
+        
+        if(lineRead)                       //if there is more to read it will read the next line
+            line = inputFile.nextLine();
+        
+        return lineRead;
+        
+    }
+    
+    public double getAverage(){
+        
+        int total = 0;
+        double average;
+        
+        String[] tokens = line.split(",");  //tokenize the last line read from the file
+        
+        for(String str : tokens)   // calculate the total of the scores
+        {
+            total += Integer.parseInt(str);
+        }
+        
+        average = (double) total / tokens.length;  //calculate the average of the acores using a cast
+        
+        return average;
+    }
+    
+    public void close() throws IOException
+    {
+        inputFile.close();
+    }
+    
+    
+}
